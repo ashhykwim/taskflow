@@ -1,0 +1,42 @@
+<%# Shared by new.html.erb and edit.html.erb.
+    form_with works out the URL and HTTP verb from the object:
+      new record      -> POST  /tasks
+      existing record -> PATCH /tasks/:id %>
+<%= form_with(model: task) do |form| %>
+
+  <% if task.errors.any? %>
+    <div class="alert alert-danger">
+      <h2 class="h6 mb-2">
+        <%= pluralize(task.errors.count, "error") %> stopped this from saving:
+      </h2>
+      <ul class="mb-0">
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label fw-semibold" %>
+    <%= form.text_field :title,
+          class: "form-control #{'is-invalid' if task.errors[:title].any?}",
+          placeholder: "What needs doing?" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label fw-semibold" %>
+    <%= form.text_area :description, rows: 5, class: "form-control",
+          placeholder: "Any extra detail (optional)" %>
+  </div>
+
+  <div class="form-check mb-4">
+    <%= form.check_box :completed, class: "form-check-input" %>
+    <%= form.label :completed, "Mark as completed", class: "form-check-label" %>
+  </div>
+
+  <div class="d-flex gap-2">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", tasks_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

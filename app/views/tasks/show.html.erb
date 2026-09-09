@@ -1,0 +1,48 @@
+<% content_for :title, "#{@task.title} - TaskFlow" %>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+
+    <%= link_to "&larr; Back to tasks".html_safe, tasks_path,
+          class: "text-decoration-none small" %>
+
+    <div class="card border-0 shadow-sm mt-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <h1 class="h3 mb-0"><%= @task.title %></h1>
+          <span class="badge <%= @task.completed? ? 'text-bg-success' : 'text-bg-warning' %>">
+            <%= @task.status_label %>
+          </span>
+        </div>
+
+        <% if @task.description.present? %>
+          <p class="mb-4" style="white-space: pre-wrap;"><%= @task.description %></p>
+        <% else %>
+          <p class="text-body-secondary fst-italic mb-4">No description.</p>
+        <% end %>
+
+        <dl class="row small text-body-secondary mb-4">
+          <dt class="col-sm-3">Created</dt>
+          <dd class="col-sm-9"><%= @task.created_at.strftime("%d %b %Y at %H:%M") %></dd>
+
+          <dt class="col-sm-3">Last updated</dt>
+          <dd class="col-sm-9"><%= @task.updated_at.strftime("%d %b %Y at %H:%M") %></dd>
+        </dl>
+
+        <div class="d-flex gap-2 flex-wrap">
+          <%= button_to (@task.completed? ? "Mark as pending" : "Mark as completed"),
+                toggle_task_path(@task),
+                method: :patch,
+                class: "btn #{@task.completed? ? 'btn-outline-secondary' : 'btn-success'}" %>
+
+          <%= link_to "Edit", edit_task_path(@task), class: "btn btn-outline-primary" %>
+
+          <%= button_to "Delete", @task,
+                method: :delete,
+                class: "btn btn-outline-danger",
+                form: { data: { turbo_confirm: "Delete this task?" } } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

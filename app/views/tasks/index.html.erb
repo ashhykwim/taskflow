@@ -1,0 +1,39 @@
+<% content_for :title, "Tasks - TaskFlow" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 mb-1">Tasks</h1>
+    <p class="text-body-secondary mb-0"><%= pluralize(@tasks.count, "task") %></p>
+  </div>
+  <%= link_to "+ New Task", new_task_path, class: "btn btn-primary" %>
+</div>
+
+<%# ---------- Filter tabs ---------- %>
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <%= link_to "All", tasks_path,
+          class: "nav-link #{'active' if params[:status].blank?}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Pending", tasks_path(status: "pending"),
+          class: "nav-link #{'active' if params[:status] == 'pending'}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Completed", tasks_path(status: "completed"),
+          class: "nav-link #{'active' if params[:status] == 'completed'}" %>
+  </li>
+</ul>
+
+<div class="card border-0 shadow-sm">
+  <% if @tasks.any? %>
+    <div class="list-group list-group-flush">
+      <%# Renders _task.html.erb once per task. %>
+      <%= render @tasks %>
+    </div>
+  <% else %>
+    <div class="card-body text-center text-body-secondary py-5">
+      <p class="mb-3">No tasks here.</p>
+      <%= link_to "Create a task", new_task_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+/*
+ * App-wide styles. Loaded AFTER bootstrap.min.css in the layout,
+ * so anything here overrides Bootstrap.
+ */
+
+body {
+  min-height: 100vh;
+}
+
+/* Stop button_to forms from breaking the button rows onto separate lines. */
+form.button_to {
+  display: inline-block;
+  margin: 0;
+}

@@ -1,0 +1,9 @@
+completed_task:
+  title: "Already finished"
+  description: "This one is done."
+  completed: true
+
+pending_task:
+  title: "Still to do"
+  description: "This one is not done."
+  completed: false
