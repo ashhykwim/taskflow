@@ -14,8 +14,11 @@ Built as a reference/portfolio project, deliberately kept small and conventional
 ## Getting started
 
 ```bash
-cd ~/taskflow
-bin/rails db:setup     # create the database, run migrations, load seeds
+git clone https://github.com/ashhykwim/taskflow.git
+cd taskflow
+
+bundle install         # install the gems
+bin/rails db:setup     # create the database, run migrations, load 5 sample tasks
 bin/rails server
 ```
 
@@ -23,6 +26,22 @@ Then open http://localhost:3000
 
 If port 3000 is busy, run `bin/rails server -p 3001` and use
 http://localhost:3001 instead.
+
+Run the test suite with:
+
+```bash
+bin/rails test
+```
+
+> **Note:** `config/master.key` is not in this repository (it never should be).
+> The app runs fine in development without it. You would only need a key to
+> read encrypted credentials or to deploy to production.
+
+## Documentation
+
+The `notes/` folder is a full walkthrough of this project — how it was built,
+how a request flows through it, what every file does, how to modify it, and a
+question-and-answer bank. Start at [`notes/00-START-HERE.md`](notes/00-START-HERE.md).
 
 ## Features
 
