@@ -67,4 +67,4 @@ end
 
 # json 3.x changed JSON.parse's signature and breaks ActiveSupport session
 # cookie decoding on Rails 8.1. Pinned until that is resolved upstream.
-gem "json", "< 3"
+gem "json", "< 4"
